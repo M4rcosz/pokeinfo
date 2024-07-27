@@ -1,11 +1,11 @@
 "use client"
 import { useState } from "react";
-import InputSearch from "./components/input/InputSearch";
-import PokeInfo from "./components/section/PokeInfos";
+import PokeInfo from "./components/Section/PokeInfos";
+import InputSearchAutoComplete from "./components/Input/InputSearchAutoComplete";
 
 
 const Home = () => {
-  const [dataApi, setDataApi] = useState();
+  const [apiData, setApiData] = useState();
 
   return (
     <>
@@ -13,14 +13,14 @@ const Home = () => {
         <h1 className="text-4xl mx-auto">PokéInfo</h1>
       </header>
 
-      <main className="flex items-center flex-col gap-10">
+      <main className="flex items-center flex-col gap-10 w-96 mx-auto border rounded-md py-8 border-yellow-800">
 
-        <InputSearch
-          setDataApi={setDataApi}
+        <InputSearchAutoComplete
+          setApiData={setApiData}
         />
 
         <PokeInfo
-          dataApi={dataApi}
+          apiData={apiData}
         />
 
       </main>

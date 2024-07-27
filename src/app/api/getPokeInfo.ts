@@ -1,7 +1,9 @@
 "use server"
 import http from "@/http";
+import { gql } from '@apollo/client';
+import client from "./apollo-client";
 
-const getPokeInfo = async (searchValue: string) => {
+export const getPokemon = async (searchValue: string) => {
     try {
         const req = await http.get(searchValue.toLowerCase())
         const res = req.data
@@ -12,4 +14,23 @@ const getPokeInfo = async (searchValue: string) => {
     }
 }
 
-export default getPokeInfo
+const GET_POKEMON_INFO = gql`
+    query {
+        pokemons {
+            name
+        }
+    }
+`;
+
+export const getPokemonsNames = async () => {
+    try {
+        const { data } = await client.query({
+            query: GET_POKEMON_INFO,
+        });
+        return data.pokemons;
+    } catch (error) {
+        console.error(error);
+        throw new Error("Failed to fetch Pokémon info");
+    }
+};
+
